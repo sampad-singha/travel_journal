@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from "./components/Navbar.jsx";
+import data from "./data.jsx"
+import Card from "./components/Card.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const card_data = data.map((entry,index) =>{
+        if(index !== data.length -1){
+            return (
+                <>
+                    <Card key={entry.googleMapsUrl}{...entry} />
+                    <hr className={"divider"}/>
+                </>
+            )
+        }
+        return(
+                <Card key={entry.googleMapsUrl}{...entry} />
+        )})
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+    return (
+        <div className={"page"}>
+            <Navbar />
+            <div className={"main"}>
+                {card_data}
+            </div>
+        </div>
+    )
 }
 
 export default App
+
+// {
+//     title: "Mount Fuji",
+//     location: "Japan",
+//     googleMapsUrl: "https://goo.gl/maps/1DGM5WrWnATgkSNB8",
+//     startDate: "12 Jan, 2021",
+//     endDate: "24 Jan, 2021",
+//     description: "Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,380 feet). Mount Fuji is the single most popular tourist site in Japan, for both Japanese and foreign tourists.",
+//     imageUrl: "https://source.unsplash.com/WLxQvbMyfas"
+// }
